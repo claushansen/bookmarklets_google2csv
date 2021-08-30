@@ -1,17 +1,21 @@
 ﻿
 queryResultsText = 'Placement,Domain,PageURL,Keyword\n';
 var keyword = document.querySelector('[name="q"]').value;
-var q = document.querySelectorAll('.g .r');
+var q = document.querySelectorAll('.g');
 q.forEach(function (item, index) {
   var fullpath;
-  if (item.tagName == 'DIV') {
-    fullpath = item.querySelector('h3').closest('a').href;
-  } else {
-    fullpath = item.querySelector('a').href;
+  try {
+    if (item.tagName == 'DIV') {
+      fullpath = item.querySelector('h3').closest('a').href;
+    } else {
+      fullpath = item.querySelector('a').href;
+    }
+    let url = new URL(fullpath);
+    let domain = url.host;
+    queryResultsText += index + 1 + "," + domain + "," + url + "," + keyword + "\n";
+  } catch (err) {
+    console.log('unable to register result from:' + item.innerHTML);
   }
-  let url = new URL(fullpath);
-  let domain = url.host;
-  queryResultsText += index + 1 + "," + domain + "," + url + "," + keyword + "\n";
 });
 copyTextToClipboard(queryResultsText);
 function copyTextToClipboard(text) {
