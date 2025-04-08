@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google2CSV</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google2CSV</title>
 </head>
 <body>
-    <h1>Exstract searchresults as CSV from Google</h1>
-    <p>Pull the link to your bookmarks and click it when on Google's resultpage</p>
-    <p><a class="bookmarklet" href="javascript:(function()%7BqueryResultsText%3D%22Placement%2CDomain%2CPageURL%2CKeyword%5Cn%22%3Bvar%20keyword%3Ddocument.querySelector('%5Bname%3D%22q%22%5D').value%2Cq%3Ddocument.querySelectorAll(%22.g%22)%3Bfunction%20copyTextToClipboard(e)%7Bvar%20t%3Ddocument.createElement(%22textarea%22)%3Bt.value%3De%2Cdocument.body.appendChild(t)%2Ct.focus()%2Ct.select()%3Btry%7Bvar%20o%3Ddocument.execCommand(%22copy%22)%3Balert(%22Kopieringen%20af%20resultatlisten%20%22%2B(o%3F%22lykkedes%22%3A%22Fejlede%22))%7Dcatch(e)%7Balert(%22Oops%2C%20unable%20to%20copy%22%2Ce)%7Ddocument.body.removeChild(t)%7Dq.forEach(function(e%2Ct)%7Bvar%20o%3Btry%7Bo%3D%22DIV%22%3D%3De.tagName%3Fe.querySelector(%22h3%22).closest(%22a%22).href%3Ae.querySelector(%22a%22).href%3Blet%20r%3Dnew%20URL(o)%2Cl%3Dr.host%3BqueryResultsText%2B%3Dt%2B1%2B%22%2C%22%2Bl%2B%22%2C%22%2Br%2B%22%2C%22%2Bkeyword%2B%22%5Cn%22%7Dcatch(t)%7Bconsole.log(%22unable%20to%20register%20result%20from%3A%22%2Be.innerHTML)%7D%7D)%2CcopyTextToClipboard(queryResultsText)%7D)()">google2csv</a></p>
-    
+  <h1>Extract search results as CSV from Google</h1>
+  <p>Pull the link to your bookmarks and click it when on Google's result page</p>
+  <p>
+    <a class="bookmarklet" 
+       href="javascript:(function(){var t=%22Placement,Domain,PageURL,Keyword\n%22,k=document.querySelector(%27%5Bname=%5C%22q%5C%22%5D%27).value,rs=document.querySelectorAll(%22%23rso%20a%20h3%22);rs.forEach(function(h3,i){var a=h3.closest(%22a%22);try{var u=a.href,d=(new URL(u)).host;t+=(i+1)+%22,%22+d+%22,%22+u+%22,%22+k+%22\n%22}catch(e){console.log(%22Unable to register result from: %22+(a?a.innerHTML:h3.outerHTML))}});function copyTextToClipboard(text){var ta=document.createElement(%22textarea%22);ta.value=text;document.body.appendChild(ta);ta.focus();ta.select();try{alert(%22Kopieringen af resultatlisten %22+(document.execCommand(%22copy%22)?%22lykkedes%22:%22fejlede%22))}catch(e){alert(%22Oops, unable to copy: %22+e)}document.body.removeChild(ta)};copyTextToClipboard(t)})();">
+      google2csv
+    </a>
+  </p>
 </body>
 </html>
